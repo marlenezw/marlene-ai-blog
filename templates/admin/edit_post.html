@@ -1,0 +1,112 @@
+{% extends "admin/base.html" %}
+
+{% block title %}{% if is_new %}New Post{% else %}Edit Post{% endif %}{% endblock %}
+
+{% block content %}
+<div class="admin-header">
+    <h1>{% if is_new %}📝 new post{% else %}✏️ edit post{% endif %}</h1>
+    <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary">← back to posts</a>
+</div>
+
+<form method="POST" class="post-form">
+    <div class="form-main">
+        <div class="form-group">
+            <label for="title">title *</label>
+            <input type="text" id="title" name="title" value="{{ post.title if post else '' }}" required>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label for="slug">slug (url)</label>
+                <input type="text" id="slug" name="slug" value="{{ post.slug if post else '' }}" placeholder="auto-generated from title">
+            </div>
+            <div class="form-group">
+                <label for="date">date *</label>
+                <input type="date" id="date" name="date" value="{{ post.date if post else '' }}" required>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="preview">preview text</label>
+            <input type="text" id="preview" name="preview" value="{{ post.preview if post else '' }}" placeholder="Short preview shown on home page">
+        </div>
+        
+        <div class="form-group">
+            <label for="content">content *</label>
+            <textarea id="content" name="content" rows="12" required>{{ post.content if post else '' }}</textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="tags">tags (comma-separated)</label>
+            <input type="text" id="tags" name="tags" value="{{ post.tags|join(', ') if post else '' }}" placeholder="thoughts, personal, tech">
+            <div class="available-tags">
+                available: {% for tag in tags %}<span class="tag-chip" onclick="addTag('{{ tag.name }}')">{{ tag.name }}</span>{% endfor %}
+            </div>
+        </div>
+    </div>
+    
+    <div class="form-sidebar">
+        <div class="sidebar-section">
+            <h3>publish</h3>
+            <div class="checkbox-group">
+                <label>
+                    <input type="checkbox" name="published" {% if post and post.published %}checked{% elif not post %}checked{% endif %}>
+                    published
+                </label>
+            </div>
+            <div class="checkbox-group">
+                <label>
+                    <input type="checkbox" name="highlight" {% if post and post.highlight %}checked{% endif %}>
+                    highlight on sidebar
+                </label>
+            </div>
+            <div class="checkbox-group">
+                <label>
+                    <input type="checkbox" name="placeholder" {% if post and post.placeholder %}checked{% endif %}>
+                    🧪 show placeholder (experiment in progress)
+                </label>
+            </div>
+        </div>
+        
+        <div class="sidebar-section">
+            <h3>🔍 seo</h3>
+            <div class="form-group">
+                <label for="meta_description">meta description</label>
+                <textarea id="meta_description" name="meta_description" rows="3" placeholder="Brief description for search engines">{{ post.seo.meta_description if post and post.seo else '' }}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="keywords">keywords (comma-separated)</label>
+                <input type="text" id="keywords" name="keywords" value="{{ post.seo.keywords|join(', ') if post and post.seo else '' }}" placeholder="blog, technology, personal">
+            </div>
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary btn-full">
+                {% if is_new %}create post{% else %}save changes{% endif %}
+            </button>
+        </div>
+    </div>
+</form>
+
+<script>
+function addTag(tagName) {
+    const tagsInput = document.getElementById('tags');
+    const currentTags = tagsInput.value.split(',').map(t => t.trim()).filter(t => t);
+    if (!currentTags.includes(tagName)) {
+        currentTags.push(tagName);
+        tagsInput.value = currentTags.join(', ');
+    }
+}
+
+// Auto-generate slug from title
+document.getElementById('title').addEventListener('blur', function() {
+    const slugInput = document.getElementById('slug');
+    if (!slugInput.value) {
+        slugInput.value = this.value.toLowerCase()
+            .replace(/[^\w\s-]/g, '')
+            .replace(/[-\s]+/g, '-')
+            .trim();
+    }
+});
+</script>
+{% endblock %}

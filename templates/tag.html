@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}{{ tag }} - marlene.ai{% endblock %}
+
+{% block content %}
+<div class="tag-page">
+    <h1 class="tag-header">
+        <span class="tag-icon">◈</span> posts tagged "{{ tag }}"
+    </h1>
+    
+    {% if posts %}
+    <div class="posts">
+        {% for post in posts %}
+        <article class="post-preview">
+            <div class="post-date">{{ post.display_date }}</div>
+            <h2 class="post-title">
+                <a href="{{ url_for('post', slug=post.slug) }}">{{ post.title }}</a>
+            </h2>
+            <div class="post-excerpt">{{ post.preview | markdown }}</div>
+            <div class="post-meta">
+                <a href="{{ url_for('post', slug=post.slug) }}" class="read-more">read more →</a>
+                {% if post.tags %}
+                <div class="post-tags">
+                    {% for t in post.tags %}
+                    <a href="{{ url_for('tag', tag_name=t) }}" class="tag {% if t == tag %}tag-current{% endif %}">{{ t }}</a>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="no-posts">No posts found with this tag.</p>
+    {% endif %}
+    
+    <div class="post-nav">
+        <a href="{{ url_for('home') }}">← back to home</a>
+    </div>
+</div>
+{% endblock %}

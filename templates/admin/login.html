@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - marlene.ai admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
+</head>
+<body>
+    <div class="screen-container">
+        <div class="window admin-window login-window">
+            <div class="window-titlebar">
+                <span class="titlebar-text">🔐 admin login</span>
+            </div>
+            
+            <div class="admin-content">
+                <div class="login-form">
+                    <h1>marlene.ai</h1>
+                    <p class="login-subtitle">dashboard access</p>
+                    
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                            <div class="flash-message flash-{{ category }}">{{ message }}</div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                    
+                    <form method="POST" action="{{ url_for('admin_login') }}">
+                        <div class="form-group">
+                            <label for="password">password:</label>
+                            <input type="password" id="password" name="password" required autofocus>
+                        </div>
+                        <button type="submit" class="btn btn-primary">enter →</button>
+                    </form>
+                    
+                    <a href="{{ url_for('home') }}" class="back-link">← back to blog</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

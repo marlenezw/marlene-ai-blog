@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Dashboard{% endblock %} - marlene.ai admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
+</head>
+<body>
+    <div class="screen-container">
+        <div class="window admin-window">
+            <div class="window-titlebar">
+                <span class="titlebar-text">⚙️ marlene.ai dashboard</span>
+                <a href="{{ url_for('admin_logout') }}" class="logout-btn">logout</a>
+            </div>
+            
+            <nav class="admin-nav">
+                <a href="{{ url_for('admin_dashboard') }}" class="{% if request.endpoint == 'admin_dashboard' %}active{% endif %}">📝 posts</a>
+                <a href="{{ url_for('admin_tags') }}" class="{% if request.endpoint == 'admin_tags' %}active{% endif %}">🏷️ tags</a>
+                <a href="{{ url_for('admin_comments') }}" class="{% if request.endpoint == 'admin_comments' %}active{% endif %}">💬 comments</a>
+                <a href="{{ url_for('admin_messages') }}" class="{% if request.endpoint == 'admin_messages' %}active{% endif %}">📬 messages</a>
+                <a href="{{ url_for('admin_subscribers') }}" class="{% if request.endpoint == 'admin_subscribers' %}active{% endif %}">✉ subscribers</a>
+                <a href="{{ url_for('admin_settings') }}" class="{% if request.endpoint == 'admin_settings' %}active{% endif %}">⚙️ settings</a>
+                <span class="nav-divider">|</span>
+                <a href="{{ url_for('home') }}" target="_blank">view site ↗</a>
+            </nav>
+            
+            <div class="admin-content">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                        <div class="flash-message flash-{{ category }}">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                
+                {% block content %}{% endblock %}
+            </div>
+            
+            <footer class="admin-footer">
+                <span>marlene.ai dashboard</span>
+                <span class="blink">_</span>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>

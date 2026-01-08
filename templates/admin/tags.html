@@ -1,0 +1,45 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Tags{% endblock %}
+
+{% block content %}
+<div class="admin-header">
+    <h1>🏷️ tags</h1>
+</div>
+
+<div class="tags-layout">
+    <div class="tags-list">
+        <h3>existing tags</h3>
+        {% for tag in tags %}
+        <div class="tag-item">
+            <div class="tag-info">
+                <span class="tag-name">{{ tag.name }}</span>
+                <span class="tag-description">{{ tag.description or 'No description' }}</span>
+            </div>
+            <form method="POST" action="{{ url_for('admin_delete_tag', tag_name=tag.name) }}" onsubmit="return confirm('Delete this tag?');">
+                <button type="submit" class="action-btn delete-btn" title="Delete">🗑️</button>
+            </form>
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <p>No tags yet. Create one below.</p>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <div class="new-tag-form">
+        <h3>+ new tag</h3>
+        <form method="POST" action="{{ url_for('admin_tags') }}">
+            <div class="form-group">
+                <label for="name">tag name *</label>
+                <input type="text" id="name" name="name" required placeholder="e.g. thoughts">
+            </div>
+            <div class="form-group">
+                <label for="description">description</label>
+                <input type="text" id="description" name="description" placeholder="Brief description">
+            </div>
+            <button type="submit" class="btn btn-primary">create tag</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

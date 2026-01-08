@@ -1,0 +1,76 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Settings{% endblock %}
+
+{% block content %}
+<div class="admin-header">
+    <h1>⚙️ settings</h1>
+</div>
+
+<form method="POST" class="settings-form">
+    <div class="settings-section">
+        <h3>🌐 site info</h3>
+        <div class="form-group">
+            <label for="site_name">site name</label>
+            <input type="text" id="site_name" name="site_name" value="{{ settings.site_name or '' }}">
+        </div>
+        <div class="form-group">
+            <label for="site_description">site description</label>
+            <textarea id="site_description" name="site_description" rows="2">{{ settings.site_description or '' }}</textarea>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="author">author name</label>
+                <input type="text" id="author" name="author" value="{{ settings.author or '' }}">
+            </div>
+            <div class="form-group">
+                <label for="domain">domain</label>
+                <input type="text" id="domain" name="domain" value="{{ settings.domain or '' }}" placeholder="marlene.ai">
+            </div>
+        </div>
+    </div>
+    
+    <div class="settings-section">
+        <h3>📱 social links</h3>
+        <div class="form-group">
+            <label for="twitter">twitter/x handle</label>
+            <input type="text" id="twitter" name="twitter" value="{{ settings.social.twitter if settings.social else '' }}" placeholder="@username">
+        </div>
+        <div class="form-group">
+            <label for="github">github username</label>
+            <input type="text" id="github" name="github" value="{{ settings.social.github if settings.social else '' }}" placeholder="username">
+        </div>
+        <div class="form-group">
+            <label for="email">contact email</label>
+            <input type="email" id="email" name="email" value="{{ settings.social.email if settings.social else '' }}" placeholder="hello@marlene.ai">
+        </div>
+    </div>
+    
+    <div class="settings-section">
+        <h3>🔍 seo defaults</h3>
+        <div class="form-group">
+            <label for="default_keywords">default keywords (comma-separated)</label>
+            <input type="text" id="default_keywords" name="default_keywords" value="{{ settings.seo.default_keywords|join(', ') if settings.seo else '' }}" placeholder="blog, technology, personal">
+        </div>
+        <div class="form-group">
+            <label for="google_analytics">google analytics id</label>
+            <input type="text" id="google_analytics" name="google_analytics" value="{{ settings.seo.google_analytics if settings.seo else '' }}" placeholder="G-XXXXXXXXXX">
+        </div>
+    </div>
+    
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">save settings</button>
+    </div>
+</form>
+
+<div class="settings-section deploy-section">
+    <h3>🚀 deploy to github pages</h3>
+    <p>To deploy your blog:</p>
+    <ol class="deploy-steps">
+        <li>Run <code>python build.py</code> to generate static files</li>
+        <li>Commit the <code>_site</code> folder to your GitHub repo</li>
+        <li>Enable GitHub Pages in repo settings (source: <code>_site</code> folder)</li>
+        <li>Add your custom domain in GitHub Pages settings</li>
+    </ol>
+</div>
+{% endblock %}

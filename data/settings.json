@@ -1,0 +1,15 @@
+{
+    "site_name": "marlene.ai",
+    "site_description": "A personal blog about technology, thoughts, and digital wanderings.",
+    "author": "Marlene",
+    "domain": "marlene.ai",
+    "social": {
+        "twitter": "",
+        "github": "",
+        "email": ""
+    },
+    "seo": {
+        "default_keywords": ["blog", "technology", "personal", "thoughts"],
+        "google_analytics": ""
+    }
+}

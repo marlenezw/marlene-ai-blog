@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Cute mini scientist with short straight bob and white goggles -->
+  
+  <!-- Head -->
+  <ellipse cx="50" cy="45" rx="28" ry="30" fill="#8B5A2B"/>
+  
+  <!-- Short straight bob hair -->
+  <path d="M22 35 Q22 15 50 15 Q78 15 78 35 L78 55 Q75 58 70 58 L70 45 Q70 25 50 25 Q30 25 30 45 L30 58 Q25 58 22 55 Z" fill="#1a1a1a"/>
+  <!-- Front bangs -->
+  <path d="M28 35 Q50 30 72 35 L72 42 Q50 38 28 42 Z" fill="#1a1a1a"/>
+  
+  <!-- Face details -->
+  <!-- Eyes (behind glasses) -->
+  <ellipse cx="40" cy="45" rx="5" ry="4" fill="#fff"/>
+  <ellipse cx="60" cy="45" rx="5" ry="4" fill="#fff"/>
+  <circle cx="40" cy="46" r="2.5" fill="#3d2314"/>
+  <circle cx="60" cy="46" r="2.5" fill="#3d2314"/>
+  <circle cx="41" cy="45" r="1" fill="#fff"/>
+  <circle cx="61" cy="45" r="1" fill="#fff"/>
+  
+  <!-- White science goggles -->
+  <circle cx="40" cy="45" r="12" fill="none" stroke="#ffffff" stroke-width="3"/>
+  <circle cx="60" cy="45" r="12" fill="none" stroke="#ffffff" stroke-width="3"/>
+  <line x1="52" y1="45" x2="48" y2="45" stroke="#ffffff" stroke-width="3"/>
+  <line x1="28" y1="43" x2="22" y2="40" stroke="#ffffff" stroke-width="2"/>
+  <line x1="72" y1="43" x2="78" y2="40" stroke="#ffffff" stroke-width="2"/>
+  <!-- Goggle rim detail -->
+  <circle cx="40" cy="45" r="12" fill="none" stroke="#d4cce0" stroke-width="1"/>
+  <circle cx="60" cy="45" r="12" fill="none" stroke="#d4cce0" stroke-width="1"/>
+  <!-- Glasses shine -->
+  <path d="M33 40 Q35 38 40 39" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.6"/>
+  <path d="M53 40 Q55 38 60 39" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.6"/>
+  
+  <!-- Nose -->
+  <ellipse cx="50" cy="52" rx="3" ry="2" fill="#7a4a2a"/>
+  
+  <!-- Smile -->
+  <path d="M43 60 Q50 66 57 60" fill="none" stroke="#5c3d2e" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Tiny sparkles -->
+  <g fill="#8b6fad" opacity="0.6">
+    <polygon points="85,25 86,28 89,28 87,30 88,33 85,31 82,33 83,30 81,28 84,28"/>
+    <polygon points="15,30 16,32 18,32 17,34 17.5,36 15,35 12.5,36 13,34 12,32 14,32"/>
+  </g>
+</svg>

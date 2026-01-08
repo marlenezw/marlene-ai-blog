@@ -1,0 +1,94 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Comments - Admin{% endblock %}
+
+{% block content %}
+<div class="admin-header">
+    <h1>manage comments</h1>
+</div>
+
+{% if comments %}
+<table class="admin-table">
+    <thead>
+        <tr>
+            <th>Post</th>
+            <th>Author</th>
+            <th>Comment</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for comment in comments %}
+        <tr class="{% if not comment.visible %}hidden-comment{% endif %}">
+            <td>{{ comment.post_slug }}</td>
+            <td>{{ comment.name }}</td>
+            <td class="comment-preview">{{ comment.comment[:50] }}{% if comment.comment|length > 50 %}...{% endif %}</td>
+            <td>{{ comment.display_date }}</td>
+            <td>
+                {% if comment.visible %}
+                <span class="status-visible">visible</span>
+                {% else %}
+                <span class="status-hidden">hidden</span>
+                {% endif %}
+            </td>
+            <td class="actions">
+                <form action="{{ url_for('admin_toggle_comment', comment_id=comment.id) }}" method="POST" style="display: inline;">
+                    <button type="submit" class="btn-toggle">
+                        {% if comment.visible %}hide{% else %}show{% endif %}
+                    </button>
+                </form>
+                <form action="{{ url_for('admin_delete_comment', comment_id=comment.id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Delete this comment?');">
+                    <button type="submit" class="btn-delete">delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p class="no-items">No comments yet.</p>
+{% endif %}
+
+<style>
+    .hidden-comment {
+        opacity: 0.5;
+    }
+    .status-visible {
+        color: green;
+        font-size: 11px;
+    }
+    .status-hidden {
+        color: #c77;
+        font-size: 11px;
+    }
+    .comment-preview {
+        max-width: 200px;
+        font-size: 12px;
+    }
+    .btn-toggle {
+        font-size: 11px;
+        padding: 4px 8px;
+        background: var(--purple-pale);
+        border: 1px solid var(--border-light);
+        cursor: pointer;
+    }
+    .btn-toggle:hover {
+        background: var(--purple-light);
+        color: white;
+    }
+    .btn-delete {
+        font-size: 11px;
+        padding: 4px 8px;
+        background: #fdd;
+        border: 1px solid #c77;
+        color: #933;
+        cursor: pointer;
+    }
+    .btn-delete:hover {
+        background: #c77;
+        color: white;
+    }
+</style>
+{% endblock %}

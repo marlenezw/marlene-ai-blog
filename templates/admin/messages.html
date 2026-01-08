@@ -1,0 +1,139 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Messages - Admin{% endblock %}
+
+{% block content %}
+<div class="admin-header">
+    <h1>📬 messages</h1>
+    {% if unread_count > 0 %}
+    <p class="unread-badge">{{ unread_count }} unread</p>
+    {% endif %}
+</div>
+
+{% if messages %}
+<div class="messages-list">
+    {% for msg in messages %}
+    <div class="message-card {% if not msg.read %}unread{% endif %}">
+        <div class="message-header">
+            <div class="message-info">
+                <span class="message-author">{{ msg.name }}</span>
+                {% if msg.email %}
+                <span class="message-email">{{ msg.email }}</span>
+                {% endif %}
+            </div>
+            <span class="message-date">{{ msg.display_date }}</span>
+        </div>
+        <div class="message-body">{{ msg.message }}</div>
+        <div class="message-actions">
+            {% if not msg.read %}
+            <form action="{{ url_for('admin_mark_message_read', message_id=msg.id) }}" method="POST" style="display: inline;">
+                <button type="submit" class="btn-mark-read">mark as read</button>
+            </form>
+            {% endif %}
+            {% if msg.email %}
+            <a href="mailto:{{ msg.email }}" class="btn-reply">reply via email</a>
+            {% endif %}
+            <form action="{{ url_for('admin_delete_message', message_id=msg.id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Delete this message?');">
+                <button type="submit" class="btn-delete">delete</button>
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p class="no-items">No messages yet.</p>
+{% endif %}
+
+<style>
+    .unread-badge {
+        display: inline-block;
+        background: var(--purple-accent);
+        color: white;
+        font-size: 11px;
+        padding: 4px 10px;
+        border-radius: 10px;
+        margin-top: 8px;
+    }
+    .messages-list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+    .message-card {
+        background: var(--bg-window);
+        border: 2px solid var(--border-light);
+        padding: 16px;
+    }
+    .message-card.unread {
+        border-left: 4px solid var(--purple-accent);
+        background: var(--purple-pale);
+    }
+    .message-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 12px;
+        padding-bottom: 8px;
+        border-bottom: 1px dashed var(--border-light);
+    }
+    .message-author {
+        font-weight: bold;
+        color: var(--purple-dark);
+        font-size: 14px;
+    }
+    .message-email {
+        display: block;
+        font-size: 12px;
+        color: var(--text-secondary);
+        margin-top: 2px;
+    }
+    .message-date {
+        font-size: 11px;
+        color: var(--purple-light);
+    }
+    .message-body {
+        font-size: 14px;
+        color: var(--text-primary);
+        line-height: 1.6;
+        white-space: pre-wrap;
+        margin-bottom: 12px;
+    }
+    .message-actions {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+    .btn-mark-read, .btn-reply, .btn-delete {
+        font-family: "Courier New", Courier, monospace;
+        font-size: 11px;
+        padding: 4px 10px;
+        border: 1px solid var(--border-light);
+        cursor: pointer;
+        text-decoration: none;
+    }
+    .btn-mark-read {
+        background: var(--purple-pale);
+        color: var(--purple-dark);
+    }
+    .btn-mark-read:hover {
+        background: var(--purple-light);
+        color: white;
+    }
+    .btn-reply {
+        background: var(--bg-window);
+        color: var(--purple-mid);
+    }
+    .btn-reply:hover {
+        background: var(--purple-pale);
+    }
+    .btn-delete {
+        background: #fdd;
+        border-color: #c77;
+        color: #933;
+    }
+    .btn-delete:hover {
+        background: #c77;
+        color: white;
+    }
+</style>
+{% endblock %}

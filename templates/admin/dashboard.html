@@ -1,0 +1,64 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Posts{% endblock %}
+
+{% block content %}
+<div class="admin-header">
+    <h1>📝 posts</h1>
+    <a href="{{ url_for('admin_new_post') }}" class="btn btn-primary">+ new post</a>
+</div>
+
+<div class="posts-table">
+    <div class="table-header">
+        <span class="col-status">status</span>
+        <span class="col-title">title</span>
+        <span class="col-date">date</span>
+        <span class="col-tags">tags</span>
+        <span class="col-actions">actions</span>
+    </div>
+    
+    {% for post in posts %}
+    <div class="table-row">
+        <span class="col-status">
+            {% if post.published %}
+            <span class="status-badge status-published" title="Published">●</span>
+            {% else %}
+            <span class="status-badge status-draft" title="Draft">○</span>
+            {% endif %}
+            {% if post.highlight %}
+            <span class="highlight-badge" title="Highlighted">★</span>
+            {% endif %}
+        </span>
+        <span class="col-title">
+            <a href="{{ url_for('admin_edit_post', post_id=post.id) }}">{{ post.title }}</a>
+        </span>
+        <span class="col-date">{{ post.display_date }}</span>
+        <span class="col-tags">
+            {% for tag in post.tags[:3] %}
+            <span class="mini-tag">{{ tag }}</span>
+            {% endfor %}
+            {% if post.tags|length > 3 %}
+            <span class="mini-tag">+{{ post.tags|length - 3 }}</span>
+            {% endif %}
+        </span>
+        <span class="col-actions">
+            <a href="{{ url_for('admin_edit_post', post_id=post.id) }}" class="action-btn" title="Edit">✏️</a>
+            <a href="{{ url_for('post', slug=post.slug) }}" class="action-btn" target="_blank" title="View">👁️</a>
+            <form method="POST" action="{{ url_for('admin_delete_post', post_id=post.id) }}" class="delete-form" onsubmit="return confirm('Are you sure you want to delete this post?');">
+                <button type="submit" class="action-btn delete-btn" title="Delete">🗑️</button>
+            </form>
+        </span>
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <p>No posts yet. <a href="{{ url_for('admin_new_post') }}">Create your first post →</a></p>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="stats-bar">
+    <span>{{ posts|length }} total posts</span>
+    <span>{{ posts|selectattr('published')|list|length }} published</span>
+    <span>{{ posts|rejectattr('published')|list|length }} drafts</span>
+</div>
+{% endblock %}

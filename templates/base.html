@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}my blog{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="screen-container">
+        <div class="window" id="mainWindow">
+            <div class="window-titlebar">
+                <div class="titlebar-buttons">
+                    <span class="btn-minimize" onclick="minimizeWindow()" title="Minimize">─</span>
+                    <div class="maximize-wrapper">
+                        <span class="btn-maximize" onclick="toggleMaximize()" title="Maximize">□</span>
+                        <div class="hint-tooltip" id="enlargeHint" style="display: none;">
+                            <span class="hint-text">click to enlarge</span>
+                            <span class="hint-arrow">↓</span>
+                        </div>
+                    </div>
+                    <span class="btn-close" onclick="closeWindow()" title="Close">×</span>
+                </div>
+                <span class="titlebar-text">marlene.ai</span>
+            </div>
+            
+            <nav class="nav">
+                <a href="{{ url_for('home') }}">home</a>
+                <span class="nav-separator">|</span>
+                <a href="{{ url_for('experiments') }}">experiments</a>
+                <span class="nav-separator">|</span>
+                <a href="{{ url_for('about') }}">about</a>
+            </nav>
+            
+            <main class="content">
+                <div class="content-layout">
+                    <div class="main-content">
+                        {% block content %}{% endblock %}
+                    </div>
+                    <aside class="sidebar">
+                        {% block sidebar %}
+                        <div class="sidebar-section">
+                            <h3 class="sidebar-title">✦ tiny experiments</h3>
+                            <ul class="highlights-list">
+                                {% for h in highlights %}
+                                <li>
+                                    <a href="{{ url_for('post', slug=h.slug) }}">{{ h.title }}</a>
+                                    <span class="highlight-date">{{ h.display_date }}</span>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endblock %}
+                    </aside>
+                </div>
+            </main>
+            
+            <footer class="footer">
+                <div class="footer-actions">
+                    <div class="subscribe-options">
+                        <form class="subscribe-form" action="{{ url_for('subscribe') }}" method="POST">
+                            <input type="email" name="email" placeholder="your@email.com" required>
+                            <button type="submit" title="Subscribe via email">✉ subscribe</button>
+                        </form>
+                        <a href="{{ url_for('rss_feed') }}" class="rss-btn" title="Subscribe via RSS">
+                            📡 rss
+                        </a>
+                    </div>
+                    <a href="{{ url_for('send_message') }}" class="message-btn" title="Send me a message">
+                        ✉ message me
+                    </a>
+                </div>
+                <div class="status-bar">
+                    <span>© 2026</span>
+                    <span class="blink">_</span>
+                </div>
+            </footer>
+        </div>
+    </div>
+    
+    <script>
+        const mainWindow = document.getElementById('mainWindow');
+        let isMaximized = false;
+        let isMinimized = false;
+        
+        function toggleMaximize() {
+            if (isMinimized) {
+                // Restore from minimized first
+                mainWindow.classList.remove('minimized');
+                isMinimized = false;
+            }
+            
+            isMaximized = !isMaximized;
+            mainWindow.classList.toggle('maximized', isMaximized);
+            
+            // Update button appearance
+            const btn = document.querySelector('.btn-maximize');
+            btn.textContent = isMaximized ? '❐' : '□';
+            btn.title = isMaximized ? 'Restore' : 'Maximize';
+        }
+        
+        function minimizeWindow() {
+            if (isMinimized) {
+                // Restore
+                mainWindow.classList.remove('minimized');
+                isMinimized = false;
+            } else {
+                // Minimize
+                mainWindow.classList.add('minimized');
+                isMinimized = true;
+                
+                // If maximized, remove that state
+                if (isMaximized) {
+                    mainWindow.classList.remove('maximized');
+                    isMaximized = false;
+                    document.querySelector('.btn-maximize').textContent = '□';
+                }
+            }
+        }
+        
+        function closeWindow() {
+            // Fun retro effect - show a "closing" animation
+            mainWindow.style.transition = 'all 0.3s ease';
+            mainWindow.style.transform = 'scale(0.1)';
+            mainWindow.style.opacity = '0';
+            
+            setTimeout(() => {
+                // Show a fun message after "closing"
+                document.querySelector('.screen-container').innerHTML = `
+                    <div class="closed-message">
+                        <p>Program terminated.</p>
+                        <p style="margin-top: 16px; font-size: 12px;">
+                            <a href="/" style="color: var(--purple-accent);">Restart blog.exe</a>
+                        </p>
+                        <span class="blink">_</span>
+                    </div>
+                `;
+            }, 300);
+        }
+        
+        
+        // Show hint only on first visit to home page
+        const hint = document.getElementById('enlargeHint');
+        const isHomePage = window.location.pathname === '/';
+        const hasSeenHint = localStorage.getItem('hasSeenEnlargeHint');
+        
+        if (hint && isHomePage && !hasSeenHint) {
+            // Show the hint
+            hint.style.display = 'flex';
+            
+            // Mark as seen
+            localStorage.setItem('hasSeenEnlargeHint', 'true');
+            
+            // Fade out after 5 seconds
+            setTimeout(() => {
+                hint.style.opacity = '0';
+                setTimeout(() => hint.style.display = 'none', 500);
+            }, 5000);
+            
+            // Hide when maximize is clicked
+            document.querySelector('.btn-maximize').addEventListener('click', () => {
+                hint.style.opacity = '0';
+                setTimeout(() => hint.style.display = 'none', 300);
+            });
+        }
+        
+        // Double-click titlebar to maximize (classic Windows behavior)
+        document.querySelector('.window-titlebar').addEventListener('dblclick', function(e) {
+            if (!e.target.closest('.titlebar-buttons')) {
+                toggleMaximize();
+            }
+        });
+    </script>
+</body>
+</html>

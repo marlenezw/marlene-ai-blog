@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 280">
+  <!-- Simple cute scientist girl -->
+  
+  <!-- Body/Lab coat -->
+  <path d="M70 140 L65 220 L135 220 L130 140" fill="#ffffff" stroke="#d4cce0" stroke-width="2"/>
+  <!-- Lab coat collar -->
+  <path d="M85 140 L100 160 L115 140" fill="#ffffff" stroke="#d4cce0" stroke-width="2"/>
+  <!-- Coat buttons -->
+  <circle cx="100" cy="170" r="3" fill="#d4cce0"/>
+  <circle cx="100" cy="190" r="3" fill="#d4cce0"/>
+  
+  <!-- Neck -->
+  <rect x="92" y="120" width="16" height="25" fill="#8B5A2B"/>
+  
+  <!-- Head -->
+  <ellipse cx="100" cy="85" rx="40" ry="45" fill="#8B5A2B"/>
+  
+  <!-- Hair - short straight bob -->
+  <path d="M60 70 Q60 30 100 30 Q140 30 140 70 L140 100 L130 100 L130 60 Q130 45 100 45 Q70 45 70 60 L70 100 L60 100 Z" fill="#1a1a1a"/>
+  <!-- Bangs -->
+  <path d="M65 55 Q100 45 135 55 L135 70 Q100 62 65 70 Z" fill="#1a1a1a"/>
+  <!-- Side hair -->
+  <rect x="60" y="70" width="12" height="40" rx="6" fill="#1a1a1a"/>
+  <rect x="128" y="70" width="12" height="40" rx="6" fill="#1a1a1a"/>
+  
+  <!-- Face -->
+  <!-- Eyes -->
+  <ellipse cx="85" cy="85" rx="8" ry="6" fill="#fff"/>
+  <ellipse cx="115" cy="85" rx="8" ry="6" fill="#fff"/>
+  <circle cx="85" cy="86" r="4" fill="#2d1810"/>
+  <circle cx="115" cy="86" r="4" fill="#2d1810"/>
+  <circle cx="86" cy="85" r="1.5" fill="#fff"/>
+  <circle cx="116" cy="85" r="1.5" fill="#fff"/>
+  
+  <!-- Glasses - simple round white frames -->
+  <circle cx="85" cy="85" r="14" fill="none" stroke="#fff" stroke-width="3"/>
+  <circle cx="115" cy="85" r="14" fill="none" stroke="#fff" stroke-width="3"/>
+  <line x1="99" y1="85" x2="101" y2="85" stroke="#fff" stroke-width="3"/>
+  <line x1="71" y1="82" x2="63" y2="78" stroke="#fff" stroke-width="2"/>
+  <line x1="129" y1="82" x2="137" y2="78" stroke="#fff" stroke-width="2"/>
+  
+  <!-- Nose -->
+  <ellipse cx="100" cy="95" rx="4" ry="3" fill="#7a4a2a"/>
+  
+  <!-- Smile -->
+  <path d="M90 105 Q100 115 110 105" fill="none" stroke="#5c3d2e" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Arms -->
+  <path d="M70 150 Q50 170 55 200" fill="none" stroke="#8B5A2B" stroke-width="12" stroke-linecap="round"/>
+  <path d="M130 150 Q150 170 145 200" fill="none" stroke="#8B5A2B" stroke-width="12" stroke-linecap="round"/>
+  
+  <!-- Hands -->
+  <circle cx="55" cy="205" r="8" fill="#8B5A2B"/>
+  <circle cx="145" cy="205" r="8" fill="#8B5A2B"/>
+  
+  <!-- Beaker she's holding -->
+  <path d="M135 185 L140 220 L165 220 L170 185" fill="rgba(200, 180, 220, 0.4)" stroke="#8b6fad" stroke-width="2"/>
+  <ellipse cx="152.5" cy="185" rx="17.5" ry="5" fill="none" stroke="#8b6fad" stroke-width="2"/>
+  <!-- Bubbles -->
+  <circle cx="148" cy="205" r="3" fill="#9d8bb0" opacity="0.6"/>
+  <circle cx="157" cy="210" r="2" fill="#9d8bb0" opacity="0.5"/>
+  <circle cx="152" cy="200" r="2" fill="#9d8bb0" opacity="0.7"/>
+  
+  <!-- Steam wisps -->
+  <path d="M150 180 Q147 170 150 160" fill="none" stroke="#d4cce0" stroke-width="2" opacity="0.5"/>
+  <path d="M155 180 Q158 168 155 155" fill="none" stroke="#d4cce0" stroke-width="2" opacity="0.4"/>
+  
+  <!-- Sparkles -->
+  <g fill="#8b6fad" opacity="0.7">
+    <circle cx="25" cy="100" r="3"/>
+    <circle cx="175" cy="60" r="2"/>
+    <circle cx="30" cy="180" r="2"/>
+  </g>
+</svg>

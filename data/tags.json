@@ -1,0 +1,8 @@
+[
+    {"name": "thoughts", "description": "Personal reflections and musings"},
+    {"name": "personal", "description": "Personal stories and experiences"},
+    {"name": "tech", "description": "Technology and digital topics"},
+    {"name": "internet", "description": "About the web and online culture"},
+    {"name": "nostalgia", "description": "Looking back at the past"},
+    {"name": "simplicity", "description": "On minimalism and simple living"}
+]

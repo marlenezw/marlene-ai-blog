@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>marlene.ai</title>
+        <link>http://marlene.ai</link>
+        <description>Marlene's corner of the internet - thoughts on Python, AI, and more</description>
+        <language>en-us</language>
+        <atom:link href="http://marlene.ai/feed.xml" rel="self" type="application/rss+xml"/>
+        {% for post in posts %}
+        <item>
+            <title>{{ post.title }}</title>
+            <link>http://marlene.ai/post/{{ post.slug }}</link>
+            <guid>http://marlene.ai/post/{{ post.slug }}</guid>
+            <pubDate>{{ post.rss_date }}</pubDate>
+            <description><![CDATA[{{ post.preview or post.content[:200] }}...]]></description>
+        </item>
+        {% endfor %}
+    </channel>
+</rss>
