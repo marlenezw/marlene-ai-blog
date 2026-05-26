@@ -20,6 +20,13 @@ from flask import (
 from markupsafe import Markup
 from werkzeug.security import check_password_hash, generate_password_hash
 
+try:
+    import psycopg2
+    from psycopg2.extras import Json as PgJson
+except ImportError:  # local dev without psycopg2 installed
+    psycopg2 = None
+    PgJson = None
+
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', 'change-this-to-a-random-secret-key-in-production')
 app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
@@ -50,17 +57,99 @@ EMAIL_SALT = os.environ.get('EMAIL_SALT', 'marlene-blog-2026')
 
 # ============== Data Functions ==============
 
+# Postgres-backed persistence in production (DATABASE_URL set by Heroku).
+# Falls back to filesystem JSON for local development.
+DATABASE_URL = os.environ.get('DATABASE_URL')
+if DATABASE_URL and DATABASE_URL.startswith('postgres://'):
+    # psycopg2 requires the postgresql:// scheme
+    DATABASE_URL = DATABASE_URL.replace('postgres://', 'postgresql://', 1)
+
+USE_DB = bool(DATABASE_URL and psycopg2)
+
+# Files that hold list-shaped data (defaults to [] when missing).
+_LIST_KEYS = {'posts.json', 'tags.json', 'comments.json',
+              'subscribers.json', 'messages.json'}
+
+def _db_conn():
+    return psycopg2.connect(DATABASE_URL, sslmode='require')
+
+def _init_db():
+    """Create kv_store table and seed from JSON files on first run."""
+    if not USE_DB:
+        return
+    with _db_conn() as conn:
+        with conn.cursor() as cur:
+            cur.execute("""
+                CREATE TABLE IF NOT EXISTS kv_store (
+                    key TEXT PRIMARY KEY,
+                    value JSONB NOT NULL,
+                    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+                )
+            """)
+            for fname in ('posts.json', 'tags.json', 'settings.json',
+                          'comments.json', 'subscribers.json', 'messages.json'):
+                path = os.path.join(DATA_DIR, fname)
+                if not os.path.exists(path):
+                    continue
+                try:
+                    with open(path, 'r') as f:
+                        seed = json.load(f)
+                except (FileNotFoundError, json.JSONDecodeError):
+                    continue
+                # Only seed if the key doesn't already exist (idempotent across deploys).
+                cur.execute(
+                    "INSERT INTO kv_store (key, value) VALUES (%s, %s) "
+                    "ON CONFLICT (key) DO NOTHING",
+                    (fname, PgJson(seed))
+                )
+
+def _default_for(key):
+    return [] if key in _LIST_KEYS else {}
+
 def load_json(filepath):
+    key = os.path.basename(filepath)
+    if USE_DB:
+        try:
+            with _db_conn() as conn:
+                with conn.cursor() as cur:
+                    cur.execute("SELECT value FROM kv_store WHERE key = %s", (key,))
+                    row = cur.fetchone()
+                    if row is not None:
+                        return row[0]
+            return _default_for(key)
+        except Exception as e:
+            app.logger.exception("load_json DB error for %s: %s", key, e)
+            return _default_for(key)
+    # Filesystem fallback (local dev)
     try:
         with open(filepath, 'r') as f:
             return json.load(f)
     except (FileNotFoundError, json.JSONDecodeError):
-        return [] if 'posts' in filepath or 'tags' in filepath else {}
+        return _default_for(key)
 
 def save_json(filepath, data):
+    key = os.path.basename(filepath)
+    if USE_DB:
+        with _db_conn() as conn:
+            with conn.cursor() as cur:
+                cur.execute("""
+                    INSERT INTO kv_store (key, value, updated_at)
+                    VALUES (%s, %s, NOW())
+                    ON CONFLICT (key) DO UPDATE
+                        SET value = EXCLUDED.value, updated_at = NOW()
+                """, (key, PgJson(data)))
+        return
+    # Filesystem fallback (local dev)
     os.makedirs(os.path.dirname(filepath), exist_ok=True)
     with open(filepath, 'w') as f:
         json.dump(data, f, indent=4)
+
+# Initialize DB schema + seed on import (runs once per worker startup)
+try:
+    _init_db()
+except Exception as e:
+    # Don't crash the app if DB is briefly unreachable at boot; routes will retry.
+    app.logger.exception("DB init failed at startup: %s", e)
 
 def get_posts():
     return load_json(POSTS_FILE)
