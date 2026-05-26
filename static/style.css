@@ -474,6 +474,14 @@ body {
     text-align: justify;
 }
 
+.post-content img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 24px auto;
+    border-radius: 4px;
+}
+
 .post-nav {
     padding-top: 16px;
     border-top: 1px dashed var(--border-light);
