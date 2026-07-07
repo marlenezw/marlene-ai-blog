@@ -47,6 +47,7 @@ SETTINGS_FILE = os.path.join(DATA_DIR, 'settings.json')
 COMMENTS_FILE = os.path.join(DATA_DIR, 'comments.json')
 SUBSCRIBERS_FILE = os.path.join(DATA_DIR, 'subscribers.json')
 MESSAGES_FILE = os.path.join(DATA_DIR, 'messages.json')
+TALKS_FILE = os.path.join(DATA_DIR, 'talks.json')
 
 # Admin password hash (use generate_password_hash('your-password') to create a new one)
 # Current password: marlene2026!
@@ -68,7 +69,7 @@ USE_DB = bool(DATABASE_URL and psycopg2)
 
 # Files that hold list-shaped data (defaults to [] when missing).
 _LIST_KEYS = {'posts.json', 'tags.json', 'comments.json',
-              'subscribers.json', 'messages.json'}
+              'subscribers.json', 'messages.json', 'talks.json'}
 
 def _db_conn():
     return psycopg2.connect(DATABASE_URL, sslmode='require')
@@ -87,7 +88,8 @@ def _init_db():
                 )
             """)
             for fname in ('posts.json', 'tags.json', 'settings.json',
-                          'comments.json', 'subscribers.json', 'messages.json'):
+                          'comments.json', 'subscribers.json', 'messages.json',
+                          'talks.json'):
                 path = os.path.join(DATA_DIR, fname)
                 if not os.path.exists(path):
                     continue
@@ -187,6 +189,9 @@ def get_subscribers():
 
 def get_messages():
     return load_json(MESSAGES_FILE)
+
+def get_talks():
+    return load_json(TALKS_FILE)
 
 def hash_email(email):
     """Create a one-way hash of email for duplicate checking"""
