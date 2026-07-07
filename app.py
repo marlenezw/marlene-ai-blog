@@ -261,6 +261,14 @@ def experiments():
                          tags=get_tags(),
                          settings=get_settings())
 
+@app.route('/talks')
+def talks():
+    talks = get_talks()
+    talks.sort(key=lambda t: t.get('date', ''), reverse=True)
+    for t in talks:
+        t['display_date'] = format_date(t.get('date', ''))
+    return render_template('talks.html', talks=talks, tags=get_tags(), settings=get_settings())
+
 @app.route('/post/<slug>')
 def post(slug):
     posts = get_published_posts()
