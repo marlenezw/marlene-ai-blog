@@ -5,5 +5,110 @@
         "event": "PyCon US 2025",
         "date": "2025-05-16",
         "description": "A hands-on tour of building agentic loops in pure Python."
+    },
+    {
+        "title": "Marlene Mhangami \u2014 Software Engineer & Developer Advocate (Python, AI)",
+        "video_id": "Pqw0HhKigVg",
+        "event": "",
+        "date": "2025-04-20",
+        "description": "Marlene Mhangami is a software engineer and developer advocate currently working at Microsoft and GitHub. She worked at NVIDIA, and Voltron Data, and was the first African to serve on the Python Software Foundation board. In this video Marlene talks about what she does as a Developer Advocate and how to get into the field.\n \n About Marlene Mhangami:\n \u2022 Software Engineer & Developer Advocate (2026)\n \u2022 Microsoft, GitHub, NVIDIA, Voltron Data\n \u2022 First African on the Python Software Foundation board\n \u2022 Speaker: PyCon US, PyCon Africa, EuroPython\n \n \ud83d\udd17 Find me\n \u2022 X/Twitter: https://twitter.com/marlenezw\n \u2022 LinkedIn: https://www.linkedin.com/in/marlenemhangami\n \u2022 GitHub: https://github.com/marlenezw\n \u2022 Website: marlene.ai\n \n #MarleneMhangami"
+    },
+    {
+        "title": "DeepSite: Build Apps in 2mins with DeepSeek R1",
+        "video_id": "wPiNDZnM3nY",
+        "event": "",
+        "date": "2025-04-13",
+        "description": "In this video learn how to build applications faster with DeepSeek R1. We look at the Hugging Face Space example DeepSite and understand how it works and convert it to Python code to run from VSCode. \n\nTutorial Code: https://github.com/marlenezw/deepsite-python/\nDeepSite Hugging Face Space: https://huggingface.co/spaces/enzostvs/deepsite\nVideo on setting up DeepSeek with Langchain: https://www.youtube.com/watch?v=aBkpzUBg6qs"
+    },
+    {
+        "title": "Deep Research: Building an AI Research Assistant with DeepSeek R1",
+        "video_id": "UwMAqb5KGvE",
+        "event": "",
+        "date": "2025-04-08",
+        "description": "In this tutorial learn how to build a 'deep researcher' using DeepSeek R1, LangGraph, and Streamlit. We'll walk through the basics of reasoning models, state machines and create a fun interface for our researcher. \n\nTutorial Code: https://github.com/marlenezw/deepresearcher\nOpen Researcher from Langchain:"
+    },
+    {
+        "title": "Vibe Coding Best Practices - How to Build Better Apps Faster",
+        "video_id": "OIIVnKlWpK4",
+        "event": "",
+        "date": "2025-03-30",
+        "description": "In this tutorial we will learn some best practices for vibe coding by building an interactive landmark detection application. We'll go through how to start from base code and use VS Code, Copilot Agent Mode to iteratively improve the application. \n\nBase code: https://github.com/marlenezw/face-and-body-detector-with-mediapipe\nFull app:"
+    },
+    {
+        "title": "Self-reflecting AI Agents with LangGraph and Responses API \ud83e\udde0",
+        "video_id": "wPMWiiubNew",
+        "event": "",
+        "date": "2025-03-23",
+        "description": "In this video we will build a self-reflecting product marketing agent using LangGraph. In building this agent we will also test out the new OpenAI Responses API to access the web search and file search tools. \n\nTutorial Code: https://github.com/marlenezw/langgraph-reflection-product-marketer\nLangGraph Reflection repo: https://github.com/langchain-ai/langgraph-reflection\nCode Inspired by Creative Writer Sample I maintain here: https://github.com/Azure-Samples/contoso-creative-writer"
+    },
+    {
+        "title": "Exploring Multi-Modal AI: GPT-4o-Realtime and VoiceRAG",
+        "video_id": "pbuSDSN0nR0",
+        "event": "",
+        "date": "2025-03-16",
+        "description": "In this video we'll get started building two projects that use GPT-4o-Realtime for Multi-Modal AI work. We look at how to create an assistant you can talk to in the terminal using textual, and then we look at a more complex app to do RAG but with Voice! \n\nOpenai-python repo: https://github.com/openai/openai-python\nVoiceRAG repo: https://github.com/Azure-Samples/aisearch-openai-rag-audio\nLangchain multi-modal tutorial: https://www.js-craft.io/blog/multimodal-ai-agents-langgraph-images-sound/"
+    },
+    {
+        "title": "MCP 101: Build your First MCP App with Langchain",
+        "video_id": "rdvt1qBZJtI",
+        "event": "",
+        "date": "2025-03-09",
+        "description": "In this video I'll walk you through building your first MCP Client application using the MCP Python library and the new langchain-mcp-adapters library and langgraph. We'll connect to the MCP Github server and create an application to help us manage our repositories. \n\nVideo Repository with code (please leave a star): https://github.com/marlenezw/langchain-mcp/tree/main\nMCP Servers Github repository: https://github.com/modelcontextprotocol/servers/tree/main\nLangchain MCP Adapters: https://github.com/langchain-ai/langchain-mcp-adapters\nMCP Docs: https://modelcontextprotocol.info/docs/introduction/"
+    },
+    {
+        "title": "Claude 3.7 Sonnet: Building with Claude Code and Copilot Agent Mode",
+        "video_id": "LnvlEd9fVok",
+        "event": "",
+        "date": "2025-03-02",
+        "description": "In todays video we'll explore Claude Sonnet 3.7 a new model that's SOTA for coding with AI. We'll test out Claude Code for editing and understanding a code base. We'll also try out using Github CoPilot Agent Mode with Claude Code to create a project from scratch and improve it"
+    },
+    {
+        "title": "AutoGen: I Built a Multi-Agent AI Investment Team",
+        "video_id": "Hmuxr0XujQ0",
+        "event": "",
+        "date": "2025-02-23",
+        "description": "In this video, we'll explore how to use Autogen with Swarm to build multi-agent AI systems. We'll walk through a tutorial showing you how to create an investment team using these frameworks in Python.\n\nAutogen and Swarm notebook 1: https://github.com/marlenezw/autogen-swarm/tree/main\nAutogen and Swarm examples: https://microsoft.github.io/autogen/stable/user-guide/agentchat-user-guide/swarm.html#stock-research-example."
+    },
+    {
+        "title": "How to use DeepSeek R1 with Langchain",
+        "video_id": "aBkpzUBg6qs",
+        "event": "",
+        "date": "2025-02-16",
+        "description": "This video walks you through how to access and use DeepSeek R1 with Langchain. \nLink to langchain-azure: https://github.com/langchain-ai/langchain-azure"
+    },
+    {
+        "title": "Marlene Mhangami Live Stream",
+        "video_id": "RXb14YtvyhI",
+        "event": "",
+        "date": "2024-07-02",
+        "description": ""
+    },
+    {
+        "title": "Using Python to predict who will win the 2022 FIFA World Cup",
+        "video_id": "atuCThw4DVg",
+        "event": "",
+        "date": "2022-12-17",
+        "description": "TIMESTAMPS\n\nIntro 00:00\nCode (dependencies and dataset) 02:13\nData pre-processing 05:32\nBuilding the model: 12:30\nFitting the model: 17:11\nTesting the model: 18:18\nArgentina v France Prediction 21:09\nMorocco v Croatia Prediction 23:58\n\n\nIn this video I walk you through the code to use a machine learning algorithm in Python to predict who will win this weekend's games at the FIFA 2022 World Cup Championships.  We will predict who will win the championship game between Argentina and France and the game for 3rd place between Morocco and Croatia. We will use a type of machine learning model called Random Forest to make the prediction.  Let me know if my predictions came true!\n\nLinks:\nGithub with tutorial jupyter notebook: https://github.com/marlenezw/predicting-the-fifa-world-cup-champions\nKaggle Dataset: https://www.kaggle.com/code/brenda89/starter-notebook-fifa-world-cup-2022/data\n\nConnect with me on social:\nTwitter: https://twitter.com/marlene_zw\nMastodon: https://fosstodon.org/@Marlene\nGitHub: https://github.com/marlenezw\nLinkedIn: https://www.linkedin.com/in/marlenemhangami"
+    },
+    {
+        "title": "Is Santa Real? Getting Started With Deep Learning In Python",
+        "video_id": "KhY6soa3NyY",
+        "event": "",
+        "date": "2022-12-11",
+        "description": "TIMESTAMPS\n00:00 Intro\n02:09 Importing Dependencies and Examining Data\n03:08 Preprocessing Data\n03:08 How Deep Learning Models Work\n07:53 Building The Model\n10:55 Training The Model\n12:43 Testing The Model\n\nIn this video we will be carrying out image classification by building a deep learning model in Python. For this we will be using the Keras library to build a convolutional neural network. This will be a friendly introduction to neural networks and deep learning for python programmers. \n\nLink to Github with project notebook: https://github.com/marlenezw/is-santa-real-deep-learning-project\nLink to Kaggle Dataset: https://www.kaggle.com/datasets/deepcontractor/is-that-santa-image-classification\n\nConnect with me on social:\nTwitter: https://twitter.com/marlene_zw\nMastodon: https://fosstodon.org/@Marlene\nGitHub: https://github.com/marlenezw\nLinkedIn: https://www.linkedin.com/in/marlenemh..."
+    },
+    {
+        "title": "Getting Started with Stable Diffusion Locally",
+        "video_id": "eN_zKvi-I18",
+        "event": "",
+        "date": "2022-12-04",
+        "description": "TIMESTAMPS\n00:00 Intro\n00:46 How Diffusion Models Work\n03:30 Code For Installing Stable Diffusion\n\nIn this video I explain, on a high level, how diffusion models work. I also walk you through how to set up and use Stable Diffusion locally on a Mac M1. In this tutorial I use tensorflow and the keras_cv package to convert text to images. If you do not have a GPU, follow along with this tutorial in this colab notebook (https://colab.research.google.com/github/huggingface/notebooks/blob/main/diffusers/stable_diffusion.ipynb)   after running the first few cells. \n\nLinks: \nTutorial code: https://github.com/marlenezw/Getting-Started-With-Stable-Diffusion\nHugging Face Stable Diffusion 2 Space: https://huggingface.co/spaces/stabilityai/stable-diffusion\n\n(Thanks to Santiago, https://www.youtube.com/@underfitted, for a great tutorial from which I got a lot of inspiration for this video, and a lot of the code.)\n\nConnect with me on social:\nTwitter: https://twitter.com/marlene_zw\nMastodon: https://fosstodon.org/@Marlene\nGitHub: https://github.com/marlenezw\nLinkedIn: https://www.linkedin.com/in/marlenemhangami"
+    },
+    {
+        "title": "How To Set Up VS Code For Python",
+        "video_id": "UldvnEFbR3Y",
+        "event": "",
+        "date": "2022-11-26",
+        "description": "In this video, I share a bit about why I created this YouTube Channel and about the videos to come.  I talk about some of the things you should think about when picking out a code editor and why I use Visual Studio Code. I walk you through how to install, set up and use VS Code for Python developers, including how to add my favorite purple theme. \n\nFollow me on social:\nTwitter: https://twitter.com/marlene_zw\nMastodon: https://fosstodon.org/@Marlene\nGitHub: https://github.com/marlenezw\nLinkedIn: https://www.linkedin.com/in/marlenemhangami/"
     }
 ]
